@@ -9,27 +9,20 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "cards")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
-
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private String name;
-
-    @Column
-    private String price;
-
     @ManyToOne
-    private DishType dishType;
+    private User user;
 
-    @OneToMany(mappedBy = "dish")
-    private Set<DishProducts> dishProducts;
+    @OneToMany(mappedBy = "card")
+    private Set<CardDishes> dishes;
 
 }

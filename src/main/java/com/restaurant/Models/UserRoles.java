@@ -6,30 +6,35 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "user_roles")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
+public class UserRoles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private String name;
-
-    @Column
-    private String price;
+    @ManyToOne
+    private Role role;
 
     @ManyToOne
-    private DishType dishType;
+    private User user;
 
-    @OneToMany(mappedBy = "dish")
-    private Set<DishProducts> dishProducts;
+    @Column
+    private Boolean canInsert;
+
+    @Column
+    private Boolean canUpdate;
+
+    @Column
+    private Boolean canDelete;
+
+    @Column
+    private Boolean canView;
 
 }

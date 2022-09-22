@@ -6,30 +6,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "dish_products")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
+public class DishProducts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private String name;
-
-    @Column
-    private String price;
+    @ManyToOne
+    private Product product;
 
     @ManyToOne
-    private DishType dishType;
+    private Dish dish;
 
-    @OneToMany(mappedBy = "dish")
-    private Set<DishProducts> dishProducts;
+    @Column
+    private Integer orderNum;
 
+    @Column
+    private String text;
 }

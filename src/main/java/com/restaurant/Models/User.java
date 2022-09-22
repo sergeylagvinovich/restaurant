@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,6 +35,9 @@ public class User {
     @Column
     private String password;
 
-    @ManyToOne
-    private Role role;
+    @OneToMany(mappedBy = "user")
+    private Set<UserRoles> roles;
+
+    @Column
+    private Boolean isActive;
 }

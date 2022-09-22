@@ -6,15 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "units")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +22,5 @@ public class Dish {
     @Column
     private String name;
 
-    @Column
-    private String price;
-
-    @ManyToOne
-    private DishType dishType;
-
-    @OneToMany(mappedBy = "dish")
-    private Set<DishProducts> dishProducts;
 
 }

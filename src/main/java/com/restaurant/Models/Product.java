@@ -1,20 +1,20 @@
 package com.restaurant.Models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "products")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,9 @@ public class Dish {
     private String name;
 
     @Column
-    private String price;
+    private Float countInStore;
 
     @ManyToOne
-    private DishType dishType;
-
-    @OneToMany(mappedBy = "dish")
-    private Set<DishProducts> dishProducts;
+    private Unit unit;
 
 }

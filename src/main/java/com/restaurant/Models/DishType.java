@@ -23,7 +23,7 @@ public class DishType {
     @Column
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dishType")
     private Set<Dish> dishes;
 
 }
