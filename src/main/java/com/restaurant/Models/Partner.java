@@ -1,5 +1,6 @@
 package com.restaurant.Models;
 
+
 import com.restaurant.Models.BaseModel.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,20 +11,29 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "cards")
+@Table(name = "partners")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends BaseModel {
-
-    @ManyToOne
-    private User user;
-
-    @OneToMany(mappedBy = "card")
-    private Set<CardDishes> dishes;
+public class Partner extends BaseModel {
 
     @Column
-    private Boolean inOrder;
+    private String fullName;
+
+    @Column
+    private String shortName;
+
+    @Column
+    private String unp;
+
+    @Column
+    private String address;
+
+    @Column
+    private String legalAddress;
+
+    @OneToMany
+    private Set<Product> products;
 
 }

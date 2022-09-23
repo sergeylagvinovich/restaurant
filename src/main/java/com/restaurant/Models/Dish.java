@@ -1,5 +1,6 @@
 package com.restaurant.Models;
 
+import com.restaurant.Models.BaseModel.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dish {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Dish extends BaseModel {
 
     @Column
     private String name;

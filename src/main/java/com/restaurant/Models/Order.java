@@ -7,23 +7,37 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "cards")
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends BaseModel {
+public class Order extends BaseModel {
 
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "card")
-    private Set<CardDishes> dishes;
+    @ManyToOne
+    private Card card;
+
+    @ManyToOne
+    private OrderStatus orderStatus;
+
+    @ManyToOne
+    private Document document;
 
     @Column
-    private Boolean inOrder;
+    private String address;
+
+    @Column
+    private String phone;
+
+    @Column
+    private Boolean needCall;
+
 
 }

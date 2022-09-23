@@ -7,23 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "cards")
+@Table(name = "documents")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends BaseModel {
-
-    @ManyToOne
-    private User user;
-
-    @OneToMany(mappedBy = "card")
-    private Set<CardDishes> dishes;
+public class Document extends BaseModel {
 
     @Column
-    private Boolean inOrder;
+    private String name;
 
+    @Column
+    private String filePath;
 }
