@@ -1,5 +1,6 @@
 package com.restaurant.Controllers.Administration.Users;
 
+import com.restaurant.Dto.Administration.Users.UserViewDto;
 import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Users.AdministrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,44 +11,48 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = "api/users/")
+@RequestMapping (value = "api/users")
 public class UsersController {
 
 
     @Autowired
-    private AdministrationUserService administrationUserService;
+    private final AdministrationUserService administrationUserService;
+
+    public UsersController(AdministrationUserService administrationUserService) {
+        this.administrationUserService = administrationUserService;
+    }
 
     @GetMapping
-    public List<User> index(){
-        return administrationUserService.getUsers ();
+    public ResponseEntity<List<UserViewDto>> index(){
+        return new ResponseEntity<>(administrationUserService.getUsers(),HttpStatus.OK);
     }
 
     @GetMapping("/create")
-    public User create(){
-        return new User ();
+    public ResponseEntity<UserViewDto> create(){
+        return new ResponseEntity<>(administrationUserService.getUser(),HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> store(){
+    public ResponseEntity<String> store(@RequestBody UserViewDto userViewDto ){
         return new ResponseEntity<>("Your age is ", HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public User show( @PathVariable String id ){
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<UserViewDto> show(@PathVariable Integer id ){
+        return new ResponseEntity<>(administrationUserService.getUser(id),HttpStatus.OK);
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/{id}/edit")
     public User edit( @PathVariable String id ){
         return null;
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<String> update( @PathVariable String id ){
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update( @RequestBody UserViewDto userViewDto ){
         return new ResponseEntity<>("Your age is ", HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<String> delete( @PathVariable String id ){
         return new ResponseEntity<>("Your age is ", HttpStatus.OK);
     }

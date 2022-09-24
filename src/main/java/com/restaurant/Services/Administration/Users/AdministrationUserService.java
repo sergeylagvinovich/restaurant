@@ -1,11 +1,13 @@
 package com.restaurant.Services.Administration.Users;
 
-import com.restaurant.Models.User;
+import com.restaurant.Dto.Administration.Users.UserViewDto;
 
 import java.util.List;
 
 public interface AdministrationUserService {
 
-    public List<User> getUsers();
+    List<UserViewDto> getUsers();
+    UserViewDto getUser(Integer id);
+    UserViewDto getUser();
 
 }
