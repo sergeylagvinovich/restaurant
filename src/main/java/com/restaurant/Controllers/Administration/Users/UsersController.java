@@ -1,5 +1,6 @@
 package com.restaurant.Controllers.Administration.Users;
 
+import com.restaurant.Dto.Administration.Users.UserEditDto;
 import com.restaurant.Dto.Administration.Users.UserViewDto;
 import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Users.AdministrationUserService;
@@ -24,36 +25,42 @@ public class UsersController {
 
     @GetMapping
     public ResponseEntity<List<UserViewDto>> index(){
-        return new ResponseEntity<>(administrationUserService.getUsers(),HttpStatus.OK);
+        return new ResponseEntity<>(administrationUserService.getUsersForTable(),HttpStatus.OK);
     }
 
     @GetMapping("/create")
-    public ResponseEntity<UserViewDto> create(){
-        return new ResponseEntity<>(administrationUserService.getUser(),HttpStatus.OK);
+    public ResponseEntity<UserEditDto> create(){
+        return new ResponseEntity<>(administrationUserService.getUserForEdit(null),HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> store(@RequestBody UserViewDto userViewDto ){
-        return new ResponseEntity<>("Your age is ", HttpStatus.OK);
+    public ResponseEntity<UserEditDto> store(@RequestBody UserEditDto userEditDto ){
+        userEditDto = administrationUserService.saveUser(userEditDto);
+        return new ResponseEntity<>(userEditDto,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserViewDto> show(@PathVariable Integer id ){
-        return new ResponseEntity<>(administrationUserService.getUser(id),HttpStatus.OK);
+        return new ResponseEntity<>(administrationUserService.getUserForView(id),HttpStatus.OK);
     }
 
     @GetMapping("/{id}/edit")
-    public User edit( @PathVariable String id ){
-        return null;
+    public ResponseEntity<UserEditDto> edit(@PathVariable Integer id ){
+        return new ResponseEntity<>(administrationUserService.getUserForEdit(id),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update( @RequestBody UserViewDto userViewDto ){
-        return new ResponseEntity<>("Your age is ", HttpStatus.OK);
+    public ResponseEntity<UserEditDto> update( @RequestBody UserEditDto userEditDto ){
+        userEditDto = administrationUserService.saveUser(userEditDto);
+        return new ResponseEntity<>(userEditDto,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<String> delete( @PathVariable String id ){
-        return new ResponseEntity<>("Your age is ", HttpStatus.OK);
+    ResponseEntity<String> delete( @PathVariable Integer id ){
+        String result = "Ошибка удаления";
+        if(administrationUserService.deleteUser(id)){
+            result = "Удаление прошло успешно";
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

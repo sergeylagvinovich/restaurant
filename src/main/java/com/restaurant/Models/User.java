@@ -1,5 +1,6 @@
 package com.restaurant.Models;
 
+import com.restaurant.Models.BaseModel.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends BaseModel {
 
     @Column
     private String userName;
@@ -35,7 +32,7 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserRoles> roles;
 
     @Column
