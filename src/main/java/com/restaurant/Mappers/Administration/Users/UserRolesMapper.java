@@ -12,11 +12,9 @@ public interface UserRolesMapper {
 
     Set<UserRolesDto> modelToUsersRolesDto (Set<UserRoles> roles);
     @Mapping(target = "role", source = "role")
-    @Mapping(target = "userId", source = "user.id")
     UserRolesDto modelToUsersRoleDto (UserRoles roles);
 
     @Mapping(target = "role", source = "role")
-    @Mapping(target = "user.id", source = "userId")
     UserRoles dtoToModel (UserRolesDto roles);
 
 

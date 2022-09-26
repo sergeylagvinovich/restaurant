@@ -56,7 +56,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<String> delete( @PathVariable Integer id ){
+    public ResponseEntity<String> delete( @PathVariable Integer id ){
         String result = "Ошибка удаления";
         if(administrationUserService.deleteUser(id)){
             result = "Удаление прошло успешно";

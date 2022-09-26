@@ -26,4 +26,6 @@ public class Card extends BaseModel {
     @Column
     private Boolean inOrder;
 
+
+
 }

@@ -7,8 +7,7 @@ import com.restaurant.Mappers.Administration.Roles.RoleMapper;
 import com.restaurant.Models.Role;
 import com.restaurant.Models.User;
 import com.restaurant.Models.UserRoles;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 import java.util.Set;
@@ -28,7 +27,10 @@ public interface UserMapper {
     @Mapping(target = "roles", source = "userRoles")
     User userDtoEditToModel(UserEditDto userEditDto);
 
-
+    @AfterMapping
+    default void linkUser( @MappingTarget User user){
+        user.getRoles ().stream ().forEach (x->x.setUser (user));
+    }
 
 
 
