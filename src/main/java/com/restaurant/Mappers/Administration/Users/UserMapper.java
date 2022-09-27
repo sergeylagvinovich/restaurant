@@ -9,6 +9,7 @@ import com.restaurant.Models.User;
 import com.restaurant.Models.UserRoles;
 import org.mapstruct.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

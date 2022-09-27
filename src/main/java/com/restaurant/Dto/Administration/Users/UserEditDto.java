@@ -1,8 +1,11 @@
 package com.restaurant.Dto.Administration.Users;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,5 +19,6 @@ public class UserEditDto {
     private String name;
     private Boolean isActive;
     private Set<UserRolesDto> userRoles;
+
 
 }

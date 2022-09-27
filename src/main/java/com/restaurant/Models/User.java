@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,7 +34,7 @@ public class User extends BaseModel {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserRoles> roles;
+    private Set<UserRoles> roles = new HashSet<> ();
 
     @Column
     private Boolean isActive;

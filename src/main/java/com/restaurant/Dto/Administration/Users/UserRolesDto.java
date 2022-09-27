@@ -10,5 +10,8 @@ public class UserRolesDto {
 
     private Integer id;
     private RoleDto role;
-
+    private Boolean canInsert;
+    private Boolean canUpdate;
+    private Boolean canDelete;
+    private Boolean canView;
 }
