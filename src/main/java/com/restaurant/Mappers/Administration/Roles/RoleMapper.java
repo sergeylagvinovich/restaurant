@@ -4,7 +4,6 @@ package com.restaurant.Mappers.Administration.Roles;
 import com.restaurant.Dto.Administration.Roles.RoleDto;
 import com.restaurant.Models.Role;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

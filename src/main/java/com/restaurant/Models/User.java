@@ -33,6 +33,9 @@ public class User extends BaseModel {
     @Column
     private String password;
 
+    @Column
+    private String address;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserRoles> roles = new HashSet<> ();
 

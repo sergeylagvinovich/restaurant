@@ -188,6 +188,7 @@ CREATE TABLE dishes (
                         created_at timestamp NULL,
                         updated_at timestamp NULL,
                         "name" varchar(255) NULL,
+                        "img_path" varchar(255) NULL,
                         price varchar(255) NULL,
                         updated_user int4 NULL,
                         dish_type_id int4 NULL,

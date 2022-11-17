@@ -31,6 +31,6 @@ public class BaseModel {
     @ManyToOne
     @JoinColumn(name = "updated_user")
     @LastModifiedBy
-    protected User user;
+    protected User updated_user;
 
 }

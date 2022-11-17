@@ -1,10 +1,7 @@
 package com.restaurant.Controllers.Administration.Roles;
 
 import com.restaurant.Dto.Administration.Roles.RoleDto;
-import com.restaurant.Dto.Administration.Users.UserEditDto;
-import com.restaurant.Dto.Administration.Users.UserViewDto;
 import com.restaurant.Services.Administration.Roles.AdministrationRoleService;
-import com.restaurant.Services.Administration.Users.AdministrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = "api/admin/roles")
+@RequestMapping (value = "api/v1/admin/roles")
 public class RolesController {
 
 

@@ -23,6 +23,9 @@ public class Dish extends BaseModel {
     @Column
     private String price;
 
+    @Column
+    private String imgPath;
+
     @ManyToOne
     private DishType dishType;
 

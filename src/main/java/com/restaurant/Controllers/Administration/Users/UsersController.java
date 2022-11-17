@@ -2,7 +2,6 @@ package com.restaurant.Controllers.Administration.Users;
 
 import com.restaurant.Dto.Administration.Users.UserEditDto;
 import com.restaurant.Dto.Administration.Users.UserViewDto;
-import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Users.AdministrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = "api/admin/users")
+@RequestMapping (value = "api/v1/admin/users")
 public class UsersController {
 
 

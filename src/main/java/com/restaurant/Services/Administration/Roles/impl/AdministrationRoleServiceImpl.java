@@ -4,10 +4,10 @@ import com.restaurant.Dao.Roles.RoleDao;
 import com.restaurant.Dto.Administration.Roles.RoleDto;
 import com.restaurant.Mappers.Administration.Roles.RoleMapper;
 import com.restaurant.Models.Role;
-import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Roles.AdministrationRoleService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class AdministrationRoleServiceImpl implements AdministrationRoleService 
 
     @Override
     public List<RoleDto> getRoles ( ) {
+        roleDao.findAll (Sort.by ("id"));
         return mapper.modelsToDtos ((List<Role>) roleDao.findAll ());
     }
 

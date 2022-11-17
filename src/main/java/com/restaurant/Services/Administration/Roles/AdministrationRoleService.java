@@ -1,8 +1,6 @@
 package com.restaurant.Services.Administration.Roles;
 
 import com.restaurant.Dto.Administration.Roles.RoleDto;
-import com.restaurant.Dto.Administration.Users.UserEditDto;
-import com.restaurant.Dto.Administration.Users.UserViewDto;
 
 import java.util.List;
 

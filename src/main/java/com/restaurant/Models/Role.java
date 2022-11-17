@@ -17,10 +17,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class Role extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Column
     private String name;
 

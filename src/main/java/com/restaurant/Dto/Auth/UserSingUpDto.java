@@ -1,5 +1,6 @@
-package com.restaurant.Dto.Administration.Users;
+package com.restaurant.Dto.Auth;
 
+import com.restaurant.Dto.Administration.Users.UserRolesDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,16 +9,12 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class UserEditDto {
+public class UserSingUpDto {
 
-    private Integer id;
     private String userName;
     private String email;
-    private String phone;
-    private String name;
-    private String address;
-    private Boolean isActive;
+    private String password;
+    private Boolean isActive = true;
     private Set<UserRolesDto> userRoles = new HashSet<> ();
-
 
 }
