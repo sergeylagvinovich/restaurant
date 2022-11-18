@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface UsersDao extends CrudRepository<User, Integer> {
 
-
+    User findByEmail(String email);
 }

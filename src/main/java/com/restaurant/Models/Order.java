@@ -21,7 +21,7 @@ public class Order extends BaseModel {
     @ManyToOne
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Card card;
 
     @ManyToOne
@@ -35,6 +35,9 @@ public class Order extends BaseModel {
 
     @Column
     private String phone;
+
+    @Column
+    private LocalDateTime orderDate;
 
     @Column
     private Boolean needCall;

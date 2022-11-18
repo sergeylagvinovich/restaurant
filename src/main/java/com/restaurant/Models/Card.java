@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,8 @@ public class Card extends BaseModel {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "card")
-    private Set<CardDishes> dishes;
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    private Set<CardDishes> dishes = new HashSet<>();
 
     @Column
     private Boolean inOrder;

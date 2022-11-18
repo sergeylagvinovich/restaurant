@@ -33,4 +33,9 @@ public class BaseModel {
     @LastModifiedBy
     protected User updated_user;
 
+    @Override
+    public boolean equals(Object obj) {
+        BaseModel baseObj = (BaseModel) obj;
+        return baseObj.id.equals(this.id);
+    }
 }

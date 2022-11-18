@@ -17,8 +17,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings ( CorsRegistry registry ) {
-        registry.addMapping ("/**").allowedOrigins ("*");
-        registry.addMapping ("/**").allowedMethods ("*");
+        registry.addMapping("/**").allowedHeaders("*").allowedMethods("*");
     }
 
     @Override
@@ -26,4 +25,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler ("/images/**").addResourceLocations ("/WEB-INF/images/")
                 .setCacheControl (CacheControl.maxAge (2, TimeUnit.HOURS).cachePublic ());
     }
+
+
+
 }

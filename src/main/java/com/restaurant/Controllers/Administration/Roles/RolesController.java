@@ -1,10 +1,12 @@
 package com.restaurant.Controllers.Administration.Roles;
 
 import com.restaurant.Dto.Administration.Roles.RoleDto;
+import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Roles.AdministrationRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class RolesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RoleDto>> index(){
+    public ResponseEntity<List<RoleDto>> index(@AuthenticationPrincipal User user){
         return new ResponseEntity<>(administrationRoleService.getRoles(),HttpStatus.OK);
     }
 

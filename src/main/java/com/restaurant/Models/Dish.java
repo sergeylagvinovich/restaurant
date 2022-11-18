@@ -32,4 +32,5 @@ public class Dish extends BaseModel {
     @OneToMany(mappedBy = "dish")
     private Set<DishProducts> dishProducts;
 
+
 }

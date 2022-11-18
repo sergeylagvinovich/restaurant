@@ -3,6 +3,7 @@ package com.restaurant.Mappers.Administration.Users;
 import com.restaurant.Dto.Administration.Users.UserEditDto;
 import com.restaurant.Dto.Administration.Users.UserViewDto;
 import com.restaurant.Dto.Auth.UserSingUpDto;
+import com.restaurant.Dto.Main.CartUserInfoDto;
 import com.restaurant.Mappers.Administration.Roles.RoleMapper;
 import com.restaurant.Models.User;
 import org.mapstruct.*;
@@ -32,6 +33,8 @@ public interface UserMapper {
 
     @Mapping(target = "name", source = "userName")
     User userSingUpToModel( UserSingUpDto userSingUpDto );
+
+    CartUserInfoDto userToCartUserInfo(User user );
 
 
 }

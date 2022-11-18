@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRoles extends BaseModel {
+public class UserRoles extends BaseModel implements GrantedAuthority {
 
     @ManyToOne
     private Role role;
@@ -34,4 +35,8 @@ public class UserRoles extends BaseModel {
     @Column
     private Boolean canView;
 
+    @Override
+    public String getAuthority() {
+        return getRole().getName();
+    }
 }

@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 public class DishDto {
 
+    private Integer id;
     private String name;
     private String price;
     private String imgPath;

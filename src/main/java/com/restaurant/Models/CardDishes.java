@@ -19,9 +19,8 @@ public class CardDishes extends BaseModel {
     @Column
     private int count;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     private Dish dish;
-
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     private  Card card;
 }

@@ -2,14 +2,13 @@ package com.restaurant.Controllers.Main;
 
 import com.restaurant.Dto.Administration.Roles.RoleDto;
 import com.restaurant.Dto.Main.DishDto;
+import com.restaurant.Models.User;
 import com.restaurant.Services.Main.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class DishesController {
     private DishService dishService;
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<List<DishDto>> getDishes( @PathVariable Integer type ){
+    public ResponseEntity<List<DishDto>> getDishes(@PathVariable Integer type, @AuthenticationPrincipal User user){
         return new ResponseEntity<> (dishService.getDishByType (type), HttpStatus.OK);
     }
 
