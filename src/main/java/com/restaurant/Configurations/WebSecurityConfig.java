@@ -38,8 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated().and().csrf().disable();
-        http.addFilterBefore(new CorsFilter(corsConfigurationSource("http://localhost:8082")), AbstractPreAuthenticatedProcessingFilter.class);
+                .anyRequest()
+                .permitAll().and().csrf().disable();
+//                .authenticated().and().csrf().disable();
+        http.addFilterBefore(new CorsFilter(corsConfigurationSource("http://localhost:8081")), AbstractPreAuthenticatedProcessingFilter.class);
 
     }
 
