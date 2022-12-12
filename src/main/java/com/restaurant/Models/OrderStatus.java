@@ -19,4 +19,7 @@ public class OrderStatus extends BaseModel {
 
     @Column
     private String name;
+
+    @Column
+    private Integer priority;
 }

@@ -42,5 +42,8 @@ public class Order extends BaseModel {
     @Column
     private Boolean needCall;
 
+    @ManyToOne
+    private User executor;
+
 
 }

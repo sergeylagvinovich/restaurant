@@ -37,9 +37,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure ( HttpSecurity http ) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated().and().csrf().disable();
-        http.addFilterBefore(new CorsFilter(corsConfigurationSource("http://localhost:8082")), AbstractPreAuthenticatedProcessingFilter.class);
+                .antMatchers("/api/v1/auth/**","/logout").permitAll().anyRequest().authenticated()
+                .and()
+                .logout()
+                .permitAll()
+                .and().csrf().disable();
+        http.addFilterBefore(new CorsFilter(corsConfigurationSource("http://localhost:8081")), AbstractPreAuthenticatedProcessingFilter.class);
 
     }
 
