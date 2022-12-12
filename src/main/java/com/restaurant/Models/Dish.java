@@ -21,7 +21,7 @@ public class Dish extends BaseModel {
     private String name;
 
     @Column
-    private String price;
+    private float price;
 
     @Column
     private String imgPath;
