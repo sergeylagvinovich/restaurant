@@ -1,9 +1,6 @@
 package com.restaurant.Services.Main.impl;
 
-import com.restaurant.Dao.CardDao;
-import com.restaurant.Dao.CardDishesDao;
-import com.restaurant.Dao.OrderDao;
-import com.restaurant.Dao.OrderStatusDao;
+import com.restaurant.Dao.*;
 import com.restaurant.Dao.Users.UsersDao;
 import com.restaurant.Dto.Main.CreateOrderDto;
 import com.restaurant.Dto.Orders.OrdersPageDto;
@@ -23,12 +20,11 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.aspectj.util.FileUtil;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -52,12 +48,15 @@ public class OrderServiceImpl implements OrderService {
     private OrderStatusDao orderStatusDao;
 
     @Autowired
+    private DocumentsDao documentsDao;
+
+    @Autowired
     private CardDao cardDao;
     @Autowired
     private CardDishesDao cardDishesDao;
     @Override
     @Transactional
-    public Boolean createOrder(CreateOrderDto createOrderDto) {
+    public Boolean createOrder(CreateOrderDto createOrderDto) throws IOException {
         User user = HelpFacade.getUser();
         user.setPhone(createOrderDto.getPhone());
         user.setAddress(createOrderDto.getAddress());
@@ -72,7 +71,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setCard(card);
         order.setOrderStatus(orderStatusDao.findById(1).get());
-        orderDao.save(order);
+        order = orderDao.save(order);
+        this.createDocument(order);
         return true;
     }
 
@@ -88,15 +88,47 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean setStatus(Integer status, Order order) {
-        if(status==2 || status==6){
+    public boolean setStatus(Integer status, Order order) throws IOException {
+        if(status==9 || status==5 || status==8){
             User user = HelpFacade.getUser();
             order.setExecutor(user);
         }
+        switch (status){
+            case 9:{
+                this.addInDocument(order.getDocument().getFilePath(),order.getExecutor().getName(),0);
+                break;
+            }
+            case 5:{
+                this.addInDocument(order.getDocument().getFilePath(),order.getExecutor().getName(),1);
+                break;
+            }
+            case 8:{
+                this.addInDocument(order.getDocument().getFilePath(),order.getExecutor().getName(),2);
+                break;
+            }
+        }
+
         order.setOrderStatus(orderStatusDao.findById(status).get());
         orderDao.save(order);
         return true;
     }
+
+    private void addInDocument(String filePath, String userName, Integer rowIndex) throws IOException {
+        File original = new File (filePath);
+        XWPFDocument document = new XWPFDocument (new FileInputStream (original));
+        XWPFTable table  = document.getTables ().get (4);
+        table.getRow(rowIndex).getCell(1).setText(userName);
+        FileOutputStream out = new FileOutputStream (original);
+        document.write (out);
+        out.close ();
+    }
+
+
+
+    @Value("${path.template}")
+    String pathTemplate;
+    @Value("${path.to.save.order}")
+    String savePath;
     private void createDocument(Order order) throws IOException {
 //        XWPFDocument documentnt = new XWPFDocument ();
 //        HelpFacade.createDocument (null);
@@ -105,9 +137,9 @@ public class OrderServiceImpl implements OrderService {
         String fileName = myDateObj.format(myFormatObj);
 
         myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        File original = new File ("D:\\Projects\\restaurant\\src\\main\\resources\\files\\templates\\templateOrder.docx");
-        File newFile = new File ("D:\\Projects\\restaurant\\src\\main\\resources\\files\\"+fileName+".docx");
+        String saveTo = savePath+fileName+".docx";
+        File original = new File (pathTemplate);
+        File newFile = new File (saveTo);
         FileUtil.copyFile(original,newFile);
         XWPFDocument document = new XWPFDocument (new FileInputStream (newFile));
 
@@ -148,5 +180,11 @@ public class OrderServiceImpl implements OrderService {
         table.getRow (3).getCell (1).setText (df.format (totalDish+3.60+15.00));
         document.write (out);
         out.close ();
+        Document file = new Document();
+        file.setName(fileName);
+        file.setFilePath(saveTo);
+        file = documentsDao.save(file);
+        order.setDocument(file);
+        orderDao.save(order);
     }
 }

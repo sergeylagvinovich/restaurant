@@ -34,6 +34,11 @@ public class AuthController {
         return new ResponseEntity<> (administrationUserService.registerUser (user), HttpStatus.OK);
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<List<UserRolesDto>> registration( @RequestBody UserSingUpDto user){
+        return new ResponseEntity<> (administrationUserService.registerUser (user), HttpStatus.OK);
+    }
+
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody UserLogInDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
