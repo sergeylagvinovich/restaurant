@@ -14,4 +14,6 @@ public interface OrderService {
     OrdersPageDto getOrders(Integer priority);
 
     boolean setStatus(Integer status, Order order) throws IOException;
+
+    OrdersPageDto getOrdersUser();
 }

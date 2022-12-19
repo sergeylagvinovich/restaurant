@@ -88,8 +88,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrdersPageDto getOrdersUser() {
+        User user = HelpFacade.getUser();
+        List<Order> endOrders = orderDao.findOrderByUserIdAndOrderStatusId(user.getId (),8);
+        List<Order> inProcess = orderDao.findOrderByUserIdAndOrderStatusIdIsLessThan(user.getId(),8);
+        OrdersPageDto page = new OrdersPageDto();
+        page.setFreeOrders(orderMapper.ordersToPageOrderList(endOrders));
+        page.setMyOrders(orderMapper.ordersToPageOrderList(inProcess));
+        return page;
+    }
+
+    @Override
     public boolean setStatus(Integer status, Order order) throws IOException {
-        if(status==9 || status==5 || status==8){
+        if(status==9 || status==2 || status==6){
             User user = HelpFacade.getUser();
             order.setExecutor(user);
         }

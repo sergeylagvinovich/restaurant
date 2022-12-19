@@ -30,6 +30,11 @@ public class OrdersController {
         return new ResponseEntity<>(orderService.getOrders(priority),HttpStatus.OK);
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<OrdersPageDto> getOrderUser(){
+        return new ResponseEntity<>(orderService.getOrdersUser (),HttpStatus.OK);
+    }
+
     @PostMapping("/{order}/{status}/{priority}")
     public ResponseEntity<OrdersPageDto> setStatus(@PathVariable Order order, @PathVariable Integer status, @PathVariable Integer priority) throws IOException {
         orderService.setStatus(status, order);
