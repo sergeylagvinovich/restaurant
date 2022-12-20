@@ -11,6 +11,7 @@ import java.util.Set;
 public class UserEditDto {
 
     private Integer id;
+    private String password;
     private String userName;
     private String email;
     private String phone;

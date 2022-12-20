@@ -12,6 +12,7 @@ public class Orders {
 
     Integer orderId;
     Integer orderStatus;
+    String fileName;
     Set<CartDishesDto> dishes;
 
 }

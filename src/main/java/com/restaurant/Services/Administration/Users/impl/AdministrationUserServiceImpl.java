@@ -57,6 +57,8 @@ public class AdministrationUserServiceImpl implements AdministrationUserService 
     public UserEditDto saveUser(UserEditDto user) {
         User newUser = mapper.userDtoEditToModel(user);
         newUser = usersDao.save(newUser);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        newUser.setPassword(passwordEncoder.encode("123"));
         return mapper.modelToDtoEdit(newUser);
     }
 

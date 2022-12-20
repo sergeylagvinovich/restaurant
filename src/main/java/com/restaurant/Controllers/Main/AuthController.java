@@ -2,8 +2,10 @@ package com.restaurant.Controllers.Main;
 
 import com.restaurant.Dto.Administration.Roles.RoleDto;
 import com.restaurant.Dto.Administration.Users.UserRolesDto;
+import com.restaurant.Dto.Administration.Users.UserViewDto;
 import com.restaurant.Dto.Auth.UserLogInDto;
 import com.restaurant.Dto.Auth.UserSingUpDto;
+import com.restaurant.Facade.HelpFacade;
 import com.restaurant.Models.User;
 import com.restaurant.Services.Administration.Users.AdministrationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
+
+    @GetMapping("/userIfno")
+    public ResponseEntity<UserViewDto> getAuthUserInfo(){
+        User user = HelpFacade.getUser ();
+        return new ResponseEntity<>(administrationUserService.getUserForView(user.getId ()),HttpStatus.OK);
+    }
+
 
     @GetMapping
     public String test(){

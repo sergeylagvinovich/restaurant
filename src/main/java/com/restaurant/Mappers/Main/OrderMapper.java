@@ -18,6 +18,7 @@ public interface OrderMapper {
 
     @Mapping(target = "orderId", source = "id")
     @Mapping(target = "orderStatus", source = "orderStatus.priority")
+    @Mapping (target = "fileName", source = "document.name")
     @Mapping(target = "dishes", source = "card.dishes")
     Orders ordersToPageOrder(Order order);
 
